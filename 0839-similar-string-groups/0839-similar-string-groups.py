@@ -8,7 +8,7 @@ class Solution:
             return dif==0 or dif==2 
         
         def find(graph,node): 
-            if graph[node]<0:
+            if type(graph[node])==int and graph[node]<0:
                 return node
             else:
                 temp=find(graph,graph[node])
@@ -30,15 +30,15 @@ class Solution:
                     
         
         graph = {} 
-        for x in range(len(strs)):
+        for x in strs:
             graph[x]=-1 
         
-        # print(graph)
+        print(graph)
         for i in range(len(strs)):
             for j in range(i+1,len(strs)):
                 if areNeighbors(strs[i],strs[j]): 
-                    union(graph,i,j)
-        # print(graph) 
+                    union(graph,strs[i],strs[j])
+        print(graph) 
         res=0 
         for key,val in graph.items():
             if val==-1:
