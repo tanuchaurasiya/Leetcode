@@ -1,18 +1,15 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        def help(i,n,nums,dp):
-            # print(i,c)
-            if i>=n-1:
-                return 0
-            if dp[i]!=-1:
-                return dp[i]
-            minn=10**9
-            for j in range(1,nums[i]+1):
-                minn=min(minn,help(i+j,n,nums,dp)+1) 
-            dp[i]=minn
-            return dp[i]
+        def help(n,nums,dp):
+            dp[0]=0
+            for i in range(n-1):
+                for j in range(1,nums[i]+1):
+                    if i+j<n:
+                        dp[i+j]=min(dp[i]+1,dp[j+i])
+                # print(dp)
+            return dp[-1]
         n=len(nums)
-        dp=[-1]*n
-        return help(0,n,nums,dp)
+        dp=[10**9]*n
+        return help(n,nums,dp)
         
             
